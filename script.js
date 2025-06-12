@@ -15,20 +15,19 @@
 
 
 async function fetchData(url) {
-    const getUrl = await fetch(url);
-    const data = await getUrl.json();
+    const getIdFromUrl = await fetch(url);
+    const data = await getIdFromUrl.json();
     return data;
 }
 
 async function getChefBirthday(id) {
 
-    let chefBirthday;
-
     try {
 
         const getRecipe = await fetchData(`https://dummyjson.com/recipes/${id}`);
         const getChefId = await fetchData(`https://dummyjson.com/users/${getRecipe.userId}`);
-        chefBirthday = getChefId.birthDate;
+        const getChefBirthday = getChefId.birthDate;
+        return getChefBirthday;
 
     } catch (error) {
 
@@ -36,7 +35,6 @@ async function getChefBirthday(id) {
 
     }
 
-    return chefBirthday;
 }
 
 
